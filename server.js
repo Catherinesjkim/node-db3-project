@@ -1,9 +1,10 @@
 const express = require('express');
 const helmet = require('helmet');
+const mw = require("./api/middleware.js");
+const logger = mw.logger;
 
 const SchemeRouter = require('./schemes/scheme-router.js');
-const mw = require('./api/middleware.js');
-const logger = mw.logger;
+const StepRouter = require('./steps/step-router.js');
 
 const server = express();
 
@@ -11,8 +12,9 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 
-// router handler - it handles the endpoints that begins with the below URL - Connection
+//? router handler - it handles the endpoints that begins with the below URL - Connection
 server.use('/api/schemes', SchemeRouter);
+server.use('/api/steps', StepRouter);
 
 server.get('/api', (req, res) => {
   const environment = process.env;

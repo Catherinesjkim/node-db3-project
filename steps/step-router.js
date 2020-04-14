@@ -5,7 +5,8 @@ const Steps = require('./step-model.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  Steps.find()
+  Steps
+    .find()
     .then(steps => {
       res.status(200).json(steps);
     })

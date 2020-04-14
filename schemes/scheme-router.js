@@ -31,7 +31,12 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// findSteps method with select, from, join, where & orderBy
+/*
+-   `findSteps(id)`:
+    -   Expects a scheme `id`.
+    -   Resolves to an array of all correctly ordered step for the given scheme: `[ { id: 17, scheme_name: 'Find the Holy Grail', step_number: 1, instructions: 'quest'}, { id: 18, scheme_name: 'Find the Holy Grail', step_number: 2, instructions: '...and quest'}, etc. ]`.
+    -   This array should include the `scheme_name` _not_ the `scheme_id`.
+*/
 router.get('/:id/steps', (req, res) => {
   const { id } = req.params;
 
@@ -39,7 +44,7 @@ router.get('/:id/steps', (req, res) => {
     .findSteps(id)
     .then(steps => {
       if (steps.length) {
-        res.status(200).json(steps); //?
+        res.status(200).json(steps); //? Worked on Insomnia
       } else {
         res.status(404).json({ message: 'Could not find steps for given scheme' })
       }
@@ -49,7 +54,7 @@ router.get('/:id/steps', (req, res) => {
     });
 });
 
-// CREATE - Add method with insert Knex
+// CREATE - POST: Add method with insert
 router.post('/', (req, res) => {
   const schemeData = req.body;
 

@@ -20,24 +20,25 @@ function findById(id) {
     .first();
 }
 
-// GET '/:id/steps'
+//? GET '/:id/steps'
 function findSteps(id) {
   return db
     .select(
-      'steps.id', 
-      'steps.steps_number',
+      'steps.id', // Expects a scheme `id`
+      'schemes.scheme_name', // This array should include the `scheme_name` _not_ the `scheme_id`
+      'steps.step_number',
       'steps.instructions',
-      'schemes.scheme_name'
     )
     .from('steps')
     .join('schemes', 'steps.scheme_id', 'schemes.id')
-    .where('steps.scheme_id',  id)
+    .where('steps.scheme_id', id)
     .orderBy('steps.step_number');
 }
 
 // POST '/'
 function add(schemeData) {
-  return db('schemes').insert(schemeData); 
+  return db('schemes')
+    .insert(schemeData); 
 }
 
 // PUT 

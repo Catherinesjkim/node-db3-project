@@ -32,7 +32,7 @@ JOIN [Employee] as e
 -- Stretch Goal #1
 -- Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 8 records.
 
-SELECT p.ProductId, c.CategoryName, c.CategoryID as Count
+SELECT c.CategoryName, c.CategoryID as Count
 FROM Products as p
 JOIN Categories as c 
    ON p.CategoryID = c.CategoryID

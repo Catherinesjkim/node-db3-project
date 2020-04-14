@@ -28,3 +28,22 @@ JOIN [Customer] as c
  ON o.CustomerId = c.Id
 JOIN [Employee] as e
  ON o.EmployeeId = e.Id;
+
+-- Stretch Goal #1
+-- Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 8 records.
+
+SELECT p.ProductId, c.CategoryName, c.CategoryID as Count
+FROM Products as p
+JOIN Categories as c 
+   ON p.CategoryID = c.CategoryID
+GROUP BY categoryName; 
+
+
+-- Stretch Goal #2
+-- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records. Mine shows 192 records.
+
+SELECT o.OrderID, o.Quantity as ItemCount, p.ProductName, p.ProductID
+FROM Products as p
+JOIN OrderDetails as o 
+   ON p.ProductID = o.ProductID
+GROUP BY OrderID; 

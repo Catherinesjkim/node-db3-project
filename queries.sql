@@ -40,7 +40,7 @@ GROUP BY categoryName;
 
 
 -- Stretch Goal #2
--- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records. Mine shows 192 records.
+-- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records.
 
 SELECT o.OrderID, o.Quantity as ItemCount
 FROM Products as p

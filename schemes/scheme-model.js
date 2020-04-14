@@ -4,10 +4,10 @@ const db = require("../data/db-config.js");
 module.exports = {
   find,
   findById,
-  // findSteps,
-  // add,
+  findSteps,
+  add,
   update,
-  // remove
+  remove
 };
 
 function find() {
@@ -20,6 +20,27 @@ function findById(id) {
     .first();
 }
 
+// GET '/:id/steps'
+function findSteps(id) {
+  return db
+    .select(
+      'steps.id', 
+      'steps.steps_number',
+      'steps.instructions',
+      'schemes.scheme_name'
+    )
+    .from('steps')
+    .join('schemes', 'steps.scheme_id', 'schemes.id')
+    .where('steps.scheme_id',  id)
+    .orderBy('steps.step_number');
+}
+
+// POST '/'
+function add(schemeData) {
+  return db('schemes').insert(schemeData); 
+}
+
+// PUT 
 function update(changes, id) {
   return db("schemes")
     .where({ id })
@@ -29,11 +50,24 @@ function update(changes, id) {
     });
 }
 
-// function findSteps(id) {
-//   return db("steps")
-//     .where({ id })
-//     .addStep(stepData, id)
-//     .then(step => {
-//       rerturn findById(id);
-//     });
-// }
+// delete '/:id'
+function remove(id) {
+  const scheme = findById(id);
+  return db('schemes')
+    .where({ id })
+    .delete();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

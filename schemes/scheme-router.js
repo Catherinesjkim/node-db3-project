@@ -31,6 +31,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// findSteps method with select, from, join, where & orderBy
 router.get('/:id/steps', (req, res) => {
   const { id } = req.params;
 
@@ -38,7 +39,7 @@ router.get('/:id/steps', (req, res) => {
     .findSteps(id)
     .then(steps => {
       if (steps.length) {
-        res.status(200).json(steps);
+        res.status(200).json(steps); //?
       } else {
         res.status(404).json({ message: 'Could not find steps for given scheme' })
       }
@@ -48,20 +49,20 @@ router.get('/:id/steps', (req, res) => {
     });
 });
 
+// CREATE - Add method with insert Knex
 router.post('/', (req, res) => {
   const schemeData = req.body;
 
   Schemes
     .add(schemeData)
-    .then(scheme => {
-      res.status(201).json(scheme);
+    .then(ids => {
+      res.status(201).json({ created: ids[0] }); // Worked on insomnia
     })
     .catch (err => {
       res.status(500).json({ message: 'Failed to create new scheme' });
     });
 });
 
-// findSteps
 router.post('/:id/steps', (req, res) => {
   const stepData = req.body;
   const { id } = req.params; 
@@ -107,13 +108,14 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// remove method 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
   Schemes.remove(id)
   .then(deleted => {
     if (deleted) {
-      res.status(200).json({ removed: deleted });
+      res.status(200).json({ removed: deleted }); // worked on insomnia?
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id' });
     }

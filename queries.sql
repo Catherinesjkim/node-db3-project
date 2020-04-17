@@ -34,7 +34,7 @@ JOIN [Employee] as e
 -- Stretch Goal #1
 -- Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 8 records - Worked on SQLite3 studio
 
- SELECT c.CategoryName, c.Id as Count
+SELECT c.CategoryName, c.Id as Count
 FROM [Product] as p
 JOIN [Category] as c 
    ON p.CategoryId = c.Id
@@ -42,7 +42,7 @@ GROUP BY categoryName;
 
 
 -- Stretch Goal #2
--- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records - Worked on WESchool's trysql but didn't work on SQLite3 studio. 
+-- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records - Worked on WESchool's trysql but didn't work on SQLite3 studio. Github repo says use SQL Try Editor at W3Schools.com. 
 
 SELECT o.OrderID, o.Quantity as ItemCount
 FROM [Product] as p

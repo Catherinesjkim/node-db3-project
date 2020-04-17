@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   Schemes.findById(id)
     .then(scheme => {
       if (scheme) {
-        res.status(200).json(scheme); // worked on insomnia
+        res.json(scheme); //? worked on insomnia 
       } else {
         res.status(404).json({ message: 'Could not find scheme with given id.' })
       }
@@ -68,28 +68,28 @@ router.post('/', (req, res) => {
     });
 });
 
-//? CREATE - no instruction on github repo
-router.post('/:id/steps', (req, res) => {
-  const stepData = req.body;
-  const { id } = req.params; 
+// CREATE - no instruction on github repo
+// router.post('/:id/steps', (req, res) => {
+//   const stepData = req.body;
+//   const { id } = req.params; 
 
-  Schemes
-  .findById(id)
-  .then(scheme => {
-    if (scheme) {
-      Schemes
-        .addStep(stepData, id)
-        .then(step => {
-          res.status(201).json(step);
-        })
-      } else {
-        res.status(404).json({ message: 'Could not find scheme with given id.' })
-      }
-  })
-  .catch (err => {
-    res.status(500).json({ message: 'Failed to create new step' });
-  });
-});
+//   Schemes
+//   .findById(id)
+//   .then(scheme => {
+//     if (scheme) {
+//       Schemes
+//         .addStep(stepData, id)
+//         .then(step => {
+//           res.status(201).json(step); 
+//         })
+//       } else {
+//         res.status(404).json({ message: 'Could not find scheme with given id.' })
+//       }
+//   })
+//   .catch (err => {
+//     res.status(500).json({ message: 'Failed to create new step' });
+//   });
+// });
 
 // UPDATE
 router.put('/:id', (req, res) => {
@@ -103,7 +103,7 @@ router.put('/:id', (req, res) => {
         Schemes
           .update(changes, id)
           .then(updatedScheme => {
-            res.status(200).json(updatedScheme); // Worked on insomnia
+            res.status(200).json(updatedScheme); //? Worked on insomnia - TEST!
           });
         } else {
           res.status(404).json({ message: 'Could not find scheme with given id' });

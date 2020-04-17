@@ -41,6 +41,16 @@ function add(schemeData) {
     .insert(schemeData); 
 }
 
+//? POST '/:id/steps'
+function findById(stepData, id) {
+  return db('schemes')
+    .where({ id })
+    .insert(stepData)
+    .then(ids => {
+      return findById(id);
+    })
+}
+
 // PUT 
 function update(changes, id) {
   return db("schemes")
